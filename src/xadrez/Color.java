@@ -1,7 +1,7 @@
-package xadres;
+package xadrez;
 
 public enum Color {
-	
-	PRETO,
+
+	PRETO, 
 	BRANCO;
 }

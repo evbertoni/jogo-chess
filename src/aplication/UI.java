@@ -1,11 +1,11 @@
 package aplication;
 
 
-import xadres.PecaXadres;
+import xadrez.PecaXadrez;
 
 public class UI {
 	
-	public static void printBoard(PecaXadres[][] pecaXadres) {
+	public static void printBoard(PecaXadrez[][] pecaXadres) {
 		for (int i=0; i<pecaXadres.length; i++) {
 			System.out.print((8-i) + " ");
 			for (int j=0; j<pecaXadres.length; j++) {
@@ -18,14 +18,14 @@ public class UI {
 		
 	}
 	
-	private static void printPiece(PecaXadres pecaXadres) {
+	private static void printPiece(PecaXadrez pecaXadres) {
 		if (pecaXadres == null) {
-			System.out.print("- ");
+			System.out.print("-");
 		}
 		else {
 			System.out.print(pecaXadres);
 		}
-		System.out.print("");
+		System.out.print(" ");
 	}
 
 }
