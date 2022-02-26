@@ -1,10 +1,13 @@
 package aplication;
 
+import xadres.PartidaDeXadres;
+
 public class Programa {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		PartidaDeXadres partidaXadres = new PartidaDeXadres();
+		UI.printBoard(partidaXadres.getPecas());
 	}
 
 }
