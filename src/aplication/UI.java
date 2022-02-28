@@ -23,7 +23,7 @@ public class UI {
 			System.out.print("-");
 		}
 		else {
-			System.out.print(pecaXadres);
+			System.out.print(pecaXadres.toString());
 		}
 		System.out.print(" ");
 	}
