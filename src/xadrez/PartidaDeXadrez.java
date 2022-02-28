@@ -24,9 +24,11 @@ public class PartidaDeXadrez {
 		return mat;
 	}
 	
+	Torre torre = new Torre(tabuleiro, Color.PRETO);
+	Posicao posicaotorre = new Posicao(2,1);
 	
 	private void setupInicial() {
-		tabuleiro.lugarPeca(new Torre(tabuleiro, Color.PRETO), new Posicao(0,1));
+		tabuleiro.lugarPeca(torre, posicaotorre);
 		tabuleiro.lugarPeca(new Rei(tabuleiro, Color.BRANCO), new Posicao(3,1));
 	}
 	

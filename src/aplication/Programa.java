@@ -3,6 +3,7 @@ package aplication;
 
 import xadrez.PartidaDeXadrez;
 
+
 public class Programa {
 
 	public static void main(String[] args) {
@@ -11,7 +12,7 @@ public class Programa {
 		PartidaDeXadrez partidaXadrez = new PartidaDeXadrez();
 		UI.printBoard(partidaXadrez.getPecas());
 		
-		//Tabuleiro tabuleiro = new Tabuleiro(8, 8);
+		
 		
 		//PecaXadrez[][] mat = new PecaXadrez[8][8];
 		//for (int i = 0; i < 8; i++) {
