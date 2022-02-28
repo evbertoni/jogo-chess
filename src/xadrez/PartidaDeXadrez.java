@@ -36,6 +36,8 @@ public class PartidaDeXadrez {
 		posicaoNovaPeca('b', 6, torre);
 		posicaoNovaPeca('e', 8, new Rei(tabuleiro, Color.BRANCO));
 		posicaoNovaPeca('f', 4, new Rei(tabuleiro, Color.BRANCO));
+		posicaoNovaPeca('g', 3, new Rei(tabuleiro, Color.PRETO));
+		posicaoNovaPeca('c', 6, new Rei(tabuleiro, Color.PRETO));
 	}
 	
 }
