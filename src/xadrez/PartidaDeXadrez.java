@@ -29,6 +29,7 @@ public class PartidaDeXadrez {
 		Posicao inicial = posicaoInicial.toPosicao();
 		Posicao alvo = posicaoAlvo.toPosicao();
 		validarPosicaoInicial(inicial);
+		validarPosicaoAlvo(inicial, alvo);
 		Peca pecaCapturada = fazerMov(inicial, alvo);
 		return (PecaXadrez)pecaCapturada;
 		
@@ -45,20 +46,29 @@ public class PartidaDeXadrez {
 		if(!tabuleiro.existePeca(posicao)) {
 			throw new ExcessaoXadrez("Não existe peça na posição de origem");
 		}
+		if (!tabuleiro.peca(posicao).existeMovimentoPossivel()) {
+			throw new ExcessaoXadrez("Não existe movimentos possiveis para a peça escolhida");
+		}
+	}
+	
+	private void validarPosicaoAlvo(Posicao inicial, Posicao alvo) {
+		if (!tabuleiro.peca(inicial).possivelMovimento(alvo)) {
+			throw new ExcessaoXadrez("A peça escolhida não pode se mover para a posição de destino");
+		}
 	}
 	
 	private void posicaoNovaPeca(char coluna, int linha, PecaXadrez peca) {
 		tabuleiro.lugarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
 	}
 	
-	Torre torre = new Torre(tabuleiro, Color.PRETO);
+
 
 	
 	
 	private void setupInicial() {
-		posicaoNovaPeca('b', 6, torre);
+		posicaoNovaPeca('b', 6, new Torre(tabuleiro, Color.PRETO));
 		posicaoNovaPeca('e', 8, new Rei(tabuleiro, Color.BRANCO));
-		posicaoNovaPeca('f', 4, new Rei(tabuleiro, Color.BRANCO));
+		posicaoNovaPeca('f', 4, new Torre(tabuleiro, Color.BRANCO));
 		posicaoNovaPeca('g', 3, new Rei(tabuleiro, Color.PRETO));
 		posicaoNovaPeca('c', 6, new Rei(tabuleiro, Color.PRETO));
 	}
