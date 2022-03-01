@@ -16,6 +16,7 @@ public class PartidaDeXadrez {
 	private Color jogadorAtual;
 	private Tabuleiro tabuleiro;
 	private boolean check;
+	private boolean checkMate;
 	
 	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
 	private List<Peca> pecasCapturadas = new ArrayList<>();
@@ -38,6 +39,10 @@ public class PartidaDeXadrez {
 	
 	public boolean getCheck() {
 		return check;
+	}
+	
+	public boolean getCheckMate() {
+		return checkMate;
 	}
 
 	public PecaXadrez[][] getPecas() {
@@ -70,7 +75,13 @@ public class PartidaDeXadrez {
 		
 		check = (testCheck(oponente(jogadorAtual))) ? true : false;
 		
-		proximoTurno();
+		if(testCheckMate(oponente(jogadorAtual))) {
+			checkMate = true;
+		}
+		else {
+			proximoTurno();	
+		}
+				
 		return (PecaXadrez)pecaCapturada;
 		
 	}
@@ -149,6 +160,32 @@ public class PartidaDeXadrez {
 		return false;
 	}
 	
+	private boolean testCheckMate(Color cor) {
+		if (!testCheck(cor)) {
+			return false;
+		}
+		List<Peca> list = pecasNoTabuleiro.stream().filter(x -> ((PecaXadrez)x).getCor()==cor).collect(Collectors.toList());
+		
+		for (Peca p : list) {
+			boolean[][] mat = p.possiveisMovimentos();
+			for (int i=0; i< tabuleiro.getLinhas(); i++) {
+				for (int j=0; j<tabuleiro.getColunas(); j++) {
+					if (mat[i][j]) {
+						Posicao inicial = ((PecaXadrez)p).getPosicaoXadrez().toPosicao();
+						Posicao alvo = new Posicao(i,j);
+						Peca pecaCapturada = fazerMov(inicial, alvo);
+						boolean testCheck = testCheck(cor);
+						desfazerMov(inicial, alvo, pecaCapturada);
+						if (!testCheck) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
 	private void posicaoNovaPeca(char coluna, int linha, PecaXadrez peca) {
 		tabuleiro.lugarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
 		pecasNoTabuleiro.add(peca);
@@ -160,11 +197,11 @@ public class PartidaDeXadrez {
 	
 	
 	private void setupInicial() {
-		posicaoNovaPeca('b', 6, new Torre(tabuleiro, Color.PRETO));
-		posicaoNovaPeca('e', 8, new Rei(tabuleiro, Color.BRANCO));
-		posicaoNovaPeca('f', 4, new Torre(tabuleiro, Color.BRANCO));
-		posicaoNovaPeca('g', 3, new Rei(tabuleiro, Color.PRETO));
-		posicaoNovaPeca('c', 6, new Rei(tabuleiro, Color.PRETO));
+		posicaoNovaPeca('a', 8, new Rei(tabuleiro, Color.PRETO));
+		posicaoNovaPeca('b', 8, new Torre(tabuleiro, Color.PRETO));
+		posicaoNovaPeca('h', 7, new Torre(tabuleiro, Color.BRANCO));
+		posicaoNovaPeca('d', 1, new Torre(tabuleiro, Color.BRANCO));
+		posicaoNovaPeca('e', 1, new Rei(tabuleiro, Color.BRANCO));
 	}
 	
 }
